@@ -27,7 +27,7 @@ After you've implemented your SAT solver, we want you to formulate some hypothes
 
 Examples of possible hypotheses would be:
 
-our strategy 3 outperforms strategy 2, which outperforms basic DP
+our strategy 3 outperforms strategy 2, which outperforms basic DP.
 Sudoku's with fewer givens are harder, with a linear correspondence between number of givens and runtime
 Sudoku's which are hard for people are also hard for our SAT solver
 (see here (Links to an external site.) for an example set, also in other places on the Web)

@@ -1,0 +1,26 @@
+#!/usr/bin/python
+import os
+import argparse
+
+TAG = 'vu/sudosat:1.0.0'
+MNT = '/data'
+DIR = os.path.abspath('./')
+
+parser = argparse.ArgumentParser(description='SAT solver for Sudoku')
+parser.add_argument('input_file', help='Input file')
+parser.add_argument('-S', help='Strategy', default=1)
+parser.add_argument('-O', help='Output file', default='results.csv')
+parser.add_argument('-D', help='Mount directory', default=MNT)
+p = parser.parse_args()
+
+FILE_DIR = p.input_file
+FILE = os.path.basename(p.input_file)
+NEW_FILE_DIR = os.path.join(DIR, FILE)
+
+os.system('cd src && docker build -t {} .'.format(TAG))
+os.system('cp {} {}'.format(FILE_DIR, NEW_FILE_DIR))
+
+print("### RUNNING DOCKERIZED SAT SOLVER ###")
+os.system('docker run -v {}:{} {} ./SAT {}/{} -S{} -O{} -D{}'.format(DIR, MNT, TAG, MNT, FILE, p.S, p.O, p.D))
+os.system('rm {}'.format(NEW_FILE_DIR))
+
